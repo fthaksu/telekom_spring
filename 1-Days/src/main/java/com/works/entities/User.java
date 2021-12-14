@@ -26,8 +26,9 @@ public class User {
     @Email(message = "email format fail")
     private String email;
 
-    @NotNull(message = "email NotNull")
-    @NotEmpty(message = "email NotEmpty")
+    @NotNull(message = "password NotNull")
+    @NotEmpty(message = "password NotEmpty")
+    //@Pattern(regexp="^[a-zA-Z0-9]{3}",message="length must be 3")
     private String password;
 
     @Min(value = 2019, message = "year min 2019")
@@ -36,6 +37,6 @@ public class User {
 
     @Min(value = 1, message = "group min 1")
     @Max(value = 3, message = "group max 3")
-    private Byte group;
+    private Byte groups;
 
 }
