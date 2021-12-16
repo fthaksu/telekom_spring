@@ -1,10 +1,14 @@
 package com.works.services;
 
+import com.works.entities.Info;
 import com.works.entities.Role;
 import com.works.entities.User;
+import com.works.repositories.InfoRepository;
 import com.works.repositories.UserRepository;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -13,18 +17,17 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @Transactional
 public class UserDetailService implements UserDetailsService {
 
     final UserRepository uRepo;
-    public UserDetailService(UserRepository uRepo) {
+    final InfoRepository iRepo;
+    public UserDetailService(UserRepository uRepo, InfoRepository iRepo) {
         this.uRepo = uRepo;
+        this.iRepo = iRepo;
     }
 
 
@@ -62,6 +65,34 @@ public class UserDetailService implements UserDetailsService {
     public PasswordEncoder encoder() {
         return new BCryptPasswordEncoder();
     }
+
+
+    public void info(String url) {
+
+        Authentication aut = SecurityContextHolder.getContext().getAuthentication();
+        String name = aut.getName();
+        String detail = aut.getDetails().toString();
+
+        Collection<? extends GrantedAuthority> cls = aut.getAuthorities();
+        StringBuilder builder = new StringBuilder();
+        builder.append("[");
+        cls.forEach( item -> {
+           builder.append(item.getAuthority());
+           builder.append(", ");
+        });
+        builder.append("]");
+        String roles = builder.toString();
+
+        Info i = new Info();
+        i.setDate(new Date());
+        i.setDetail(detail);
+        i.setRoles(roles);
+        i.setUrl(url);
+        i.setName(name);
+        iRepo.save(i);
+        System.out.println(name + " " + url + " " + detail + " " + roles);
+    }
+
 
 
 }

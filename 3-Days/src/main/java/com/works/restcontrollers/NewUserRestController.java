@@ -26,14 +26,14 @@ public class NewUserRestController {
     public String newUser() {
 
         List<Role> roles = new ArrayList<>();
-        Optional<Role> role1 = rRepo.findById(1);
+        //Optional<Role> role1 = rRepo.findById(1);
         Optional<Role> role2 = rRepo.findById(2);
-        roles.add(role1.get());
+        //roles.add(role1.get());
         roles.add(role2.get());
 
         User u = new User();
-        u.setEmail("zehra@mail.com");
-        u.setName("Zehra");
+        u.setEmail("veli@mail.com");
+        u.setName("Veli");
         u.setSurname("Bilmem");
         u.setRoles(roles);
         u.setPassword("12345");
