@@ -41,8 +41,14 @@ function Login() {
                         toast.success(user.mesaj!)
                         const bilgiler = user.bilgiler!
                         const stBilgiler = JSON.stringify(bilgiler)
-                        sessionStorage.setItem("user", Buffer.from(stBilgiler).toString('base64') );
+
+                        const stBase64 = Buffer.from(stBilgiler).toString('base64')
+                        sessionStorage.setItem("user", stBase64 );
                         
+                        if ( remember === true ) {
+                            localStorage.setItem("user", stBase64)
+                        }
+
                         setTimeout(() => {
                             setLoginStatus(user.durum!)
                         }, 2000);

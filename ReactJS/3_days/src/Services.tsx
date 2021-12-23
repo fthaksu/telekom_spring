@@ -1,5 +1,10 @@
 import axios from "axios";
 
+const userName = process.env.REACT_APP_USERNAME;
+const password = process.env.REACT_APP_PASSWORD;
+console.log(`userName`, userName)
+console.log(`password`, password)
+
 const ref = 'c7c2de28d81d3da4a386fc8444d574f2';
 const config = axios.create({
     baseURL:'https://www.jsonbulut.com/json/',
@@ -22,5 +27,16 @@ export const login = ( email:string, password: string ) => {
         face: "no"
     }
     return config.get(url, { params })
+
+}
+
+export const product = async () => {
+
+    const url = 'product.php'
+    const params = {
+        ref: ref,
+        start: '0'
+    }
+    return await config.get(url, { params })
 
 }

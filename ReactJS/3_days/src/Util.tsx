@@ -4,6 +4,12 @@ import { Bilgiler } from './models/ILogin';
 // is login control
 export const isLogin = () => {
 
+   // Remember Me Control
+   const stRemember = localStorage.getItem("user")
+   if ( stRemember !== null ) {
+      sessionStorage.setItem("user", stRemember)
+   }
+
    const stUser = sessionStorage.getItem("user");
    if ( stUser !== null ) {
       try {
