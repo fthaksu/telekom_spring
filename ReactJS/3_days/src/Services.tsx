@@ -30,12 +30,13 @@ export const login = ( email:string, password: string ) => {
 
 }
 
-export const product = async () => {
+export const product = async ( start:number, count:number  ) => {
 
     const url = 'product.php'
     const params = {
         ref: ref,
-        start: '0'
+        start: start,
+        count: count
     }
     return await config.get(url, { params })
 

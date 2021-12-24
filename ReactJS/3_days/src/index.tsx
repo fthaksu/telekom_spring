@@ -6,6 +6,10 @@ import 'react-toastify/dist/ReactToastify.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { PrivateRoute } from './PrivateRoute'; 
 
+// redux
+import { Provider } from 'react-redux';
+import { store } from './ReduxConfig';
+
 // import Pages
 import Login from './Login';
 import Error from './Error';
@@ -13,7 +17,9 @@ import Dashboard from './Dashboard';
 import Profile from './Profile';
 
 
+
 const router = 
+<Provider store={store}>
 <Router>
   <Routes>
     <Route path="/" element={<Login />} ></Route>
@@ -22,6 +28,7 @@ const router =
     <Route path="*" element={<Error />} ></Route>
   </Routes>
 </Router>
+</Provider>
 
 
 ReactDOM.render( router, document.getElementById('root') );

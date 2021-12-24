@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Navigate, NavLink, useLocation } from 'react-router-dom'
 import { Event } from 'react-toastify/dist/core'
 import { Button, Input, Menu, Modal } from 'semantic-ui-react'
+import { userContext } from '../Context'
 import { Bilgiler } from '../models/ILogin'
 import { isLogin } from '../Util'
 
@@ -59,6 +60,7 @@ function HeaderMenu() {
 
 
     return (
+      
         <Menu secondary>
             { fncModal() }
             { isLogOut && <Navigate to='/' /> }
@@ -85,6 +87,7 @@ function HeaderMenu() {
             />
             </Menu.Menu>
         </Menu>
+        
     )
 }
 
